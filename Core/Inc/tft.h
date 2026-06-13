@@ -1,27 +1,14 @@
 #ifndef __TFT_H__
 #define __TFT_H__
 
-#include "main.h"
+#include "tft_conf.h"
 #include "font.h"
 
 /*
  * ==================== 硬件连接 ====================
  *
  *  ILI9341 2.4" TFT LCD (240x320)  SPI 8-Pin
- *
- *  屏幕引脚  |  STM32 引脚  |  说明
- *  ----------|-------------|-----------------
- *  GND       |  GND        |  电源地
- *  VCC       |  3.3V       |  电源正 (3.3V)
- *  CLK       |  PA5        |  SPI1_SCK
- *  MOSI      |  PA7        |  SPI1_MOSI
- *  MISO      |  PA6        |  SPI1_MISO (本驱动不读取)
- *  RES       |  PA3        |  复位 (GPIO Output)
- *  DC        |  PA4        |  数据/命令选择 (GPIO Output)
- *  BLK       |  PA2        |  背光 (GPIO Output)
- *  (CS)      |  无         |  模块内置接地, 无需控制
- *
- *  SPI 配置: Mode 0 (CPOL=Low, CPHA=1Edge), 8MHz
+ *  引脚配置见 tft_conf.h, 换板子只需改那一个文件
  */
 
 /* ==================== 颜色定义 (RGB565) ==================== */
