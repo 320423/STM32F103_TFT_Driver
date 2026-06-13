@@ -1,0 +1,16 @@
+{
+    "editor.tokenColorCustomizations": {
+        "comments": "#555555",
+        "textMateRules": [
+            {
+                "scope": [
+                    "string.quoted.other.lt-gt.include",
+                    "string.quoted.double.include"
+                ],
+                "settings": {
+                    "foreground": "#f7af5e"
+                }
+            }
+        ]
+    }
+}

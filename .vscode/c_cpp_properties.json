@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "compilerPath": "E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.100.202509120712\\tools\\bin\\arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mthumb",
+                "-mfpu=fpv4-sp-d16",
+                "-mfloat-abi=hard"
+            ],
+            "includePath": [
+                "${workspaceFolder}/Core/Inc",
+                "${workspaceFolder}/Drivers/STM32F1xx_HAL_Driver/Inc",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
+                "${workspaceFolder}/Drivers/CMSIS/Include",
+                "E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.100.202509120712\\tools\\arm-none-eabi\\include"
+            ],
+            "defines": [
+                "USE_HAL_DRIVER",
+                "STM32F103xE"
+            ],
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}

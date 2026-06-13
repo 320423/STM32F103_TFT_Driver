@@ -1,0 +1,65 @@
+#ifndef __TFT_H__
+#define __TFT_H__
+
+#include "main.h"
+#include "font.h"
+
+/*
+ * ==================== 硬件连接 ====================
+ *
+ *  ILI9341 2.4" TFT LCD (240x320)  SPI 8-Pin
+ *
+ *  屏幕引脚  |  STM32 引脚  |  说明
+ *  ----------|-------------|-----------------
+ *  GND       |  GND        |  电源地
+ *  VCC       |  3.3V       |  电源正 (3.3V)
+ *  CLK       |  PA5        |  SPI1_SCK
+ *  MOSI      |  PA7        |  SPI1_MOSI
+ *  MISO      |  PA6        |  SPI1_MISO (本驱动不读取)
+ *  RES       |  PA3        |  复位 (GPIO Output)
+ *  DC        |  PA4        |  数据/命令选择 (GPIO Output)
+ *  BLK       |  PA2        |  背光 (GPIO Output)
+ *  (CS)      |  无         |  模块内置接地, 无需控制
+ *
+ *  SPI 配置: Mode 0 (CPOL=Low, CPHA=1Edge), 8MHz
+ */
+
+/* ==================== 颜色定义 (RGB565) ==================== */
+#define TFT_BLACK       0x0000
+#define TFT_WHITE       0xFFFF
+#define TFT_RED         0xF800
+#define TFT_GREEN       0x07E0
+#define TFT_BLUE        0x001F
+#define TFT_YELLOW      0xFFE0
+#define TFT_CYAN        0x07FF
+#define TFT_MAGENTA     0xF81F
+#define TFT_GRAY        0x8410
+#define TFT_ORANGE      0xFC00
+
+/* ==================== 屏幕尺寸 ==================== */
+#define TFT_WIDTH       240
+#define TFT_HEIGHT      320
+
+/* ==================== 旋转方向 ==================== */
+typedef enum {
+    TFT_ROTATION_0 = 0,   // 默认竖屏 (排针朝下)
+    TFT_ROTATION_90,      // 横屏
+    TFT_ROTATION_180,     // 竖屏倒转
+    TFT_ROTATION_270      // 横屏倒转
+} TFT_Rotation;
+
+/* ==================== API ==================== */
+void TFT_Init(void);
+void TFT_SetRotation(TFT_Rotation rot);
+void TFT_SetWindow(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
+void TFT_FillColor(uint16_t color);
+void TFT_FillScreen(uint16_t color);
+void TFT_DrawPixel(uint16_t x, uint16_t y, uint16_t color);
+void TFT_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t *data);
+void TFT_DrawChar(uint16_t x, uint16_t y, char ch, const ASCIIFont *font,
+                  uint16_t fg_color, uint16_t bg_color);
+void TFT_DrawString(uint16_t x, uint16_t y, const char *str, const ASCIIFont *font,
+                    uint16_t fg_color, uint16_t bg_color);
+void TFT_BackLight(uint8_t on);
+
+#endif /* __TFT_H__ */

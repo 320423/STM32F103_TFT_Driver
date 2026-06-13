@@ -1,0 +1,77 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🐞 STM32F103ZE Debug (OpenOCD)",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/Debug/F103_TFT_DEMO.elf",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "device": "STM32F103ZE",
+            "svdFile": "${workspaceFolder}/.vscode/STM32F103xx.svd",
+            "showDevDebugOutput": "none",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            "searchDir": [
+                "E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.debug.openocd_2.3.200.202510310951\\resources\\openocd\\st_scripts"
+            ],
+            "runToEntryPoint": "main",
+            "preLaunchTask": "🔨 Build (make all)",
+            "postDebugSession": "",
+            "liveWatch": {
+                "enabled": true,
+                "refreshRate": 2000
+            },
+            "rttConfig": {
+                "enabled": false,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "RTT",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+            "gdbTarget": "localhost:3333"
+        },
+        {
+            "name": "🐞 STM32F103ZE Debug (ST-LINK GDB Server)",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/Debug/F103_TFT_DEMO.elf",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "stlink",
+            "device": "STM32F103ZE",
+            "svdFile": "${workspaceFolder}/.vscode/STM32F103xx.svd",
+            "showDevDebugOutput": "none",
+            "serverpath": "E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.stlink-gdb-server.win32_2.2.300.202509021040\\tools\\bin\\ST-LINK_gdbserver.exe",
+            "runToEntryPoint": "main",
+            "preLaunchTask": "🔨 Build (make all)",
+            "stm32cubeprogrammer": "",
+            "liveWatch": {
+                "enabled": true,
+                "refreshRate": 2000
+            }
+        },
+        {
+            "name": "⚡ Attach to running target",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/Debug/F103_TFT_DEMO.elf",
+            "type": "cortex-debug",
+            "request": "attach",
+            "servertype": "openocd",
+            "device": "STM32F103ZE",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f1x.cfg"
+            ],
+            "searchDir": [
+                "E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.debug.openocd_2.3.200.202510310951\\resources\\openocd\\st_scripts"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+../Core/Src/tft.c:26:13:TFT_WriteCmd	1
+../Core/Src/tft.c:32:13:TFT_WriteData	1
+../Core/Src/tft.c:38:13:TFT_WriteData16	1
+../Core/Src/tft.c:52:13:TFT_WriteColorBurst	2
+../Core/Src/tft.c:67:6:TFT_Init	1
+../Core/Src/tft.c:137:6:TFT_SetRotation	5
+../Core/Src/tft.c:167:6:TFT_SetWindow	1
+../Core/Src/tft.c:188:6:TFT_DrawPixel	1
+../Core/Src/tft.c:194:6:TFT_FillColor	1
+../Core/Src/tft.c:204:13:TFT_FillRect	1
+../Core/Src/tft.c:210:6:TFT_FillScreen	1
+../Core/Src/tft.c:217:6:TFT_DrawImage	2
+../Core/Src/tft.c:246:6:TFT_DrawChar	7
+../Core/Src/tft.c:291:6:TFT_DrawString	3
+../Core/Src/tft.c:314:6:TFT_BackLight	1

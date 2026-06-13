@@ -1,0 +1,6 @@
+# Hex file generation
+F103_TFT_DEMO.hex: F103_TFT_DEMO.elf
+	arm-none-eabi-objcopy -O ihex "F103_TFT_DEMO.elf" "F103_TFT_DEMO.hex"
+	@echo '已生成 hex 文件'
+
+secondary-outputs: F103_TFT_DEMO.hex

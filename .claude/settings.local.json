@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"E:/STM32CubeIde/STM32CubeIDE_2.0.0/STM32CubeIDE/plugins\" -name \"openocd*\" -o -name \"stlink*\" -o -name \"ST-LINK*\" 2>/dev/null | head -20)",
+      "Read(//e/STM32CubeIde/STM32CubeIDE_2.0.0/STM32CubeIDE/plugins/**)"
+    ]
+  }
+}

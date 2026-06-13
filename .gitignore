@@ -1,0 +1,11 @@
+# STM32CubeIDE Build Output
+Debug/
+Release/
+
+# Editor
+.settings/
+.cproject.bak
+
+# OS
+Thumbs.db
+*.DS_Store

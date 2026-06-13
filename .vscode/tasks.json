@@ -1,0 +1,85 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🔨 Build (make all)",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "chcp 65001>nul && make all -j8"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Debug",
+                "env": {
+                    "PATH": "${env:PATH};E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.100.202509120712\\tools\\bin;E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.make.win32_2.2.0.202409170845\\tools\\bin"
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/Debug"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "🧹 Clean",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "chcp 65001>nul && make clean"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Debug",
+                "env": {
+                    "PATH": "${env:PATH};E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.100.202509120712\\tools\\bin;E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.make.win32_2.2.0.202409170845\\tools\\bin"
+                }
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🔄 Rebuild (clean + all)",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "chcp 65001>nul && make clean && make all -j8"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/Debug",
+                "env": {
+                    "PATH": "${env:PATH};E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.100.202509120712\\tools\\bin;E:\\STM32CubeIde\\STM32CubeIDE_2.0.0\\STM32CubeIDE\\plugins\\com.st.stm32cube.ide.mcu.externaltools.make.win32_2.2.0.202409170845\\tools\\bin"
+                }
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}/Debug"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        }
+    ]
+}
