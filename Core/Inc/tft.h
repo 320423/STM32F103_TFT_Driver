@@ -40,6 +40,7 @@ void TFT_Init(void);
 void TFT_SetRotation(TFT_Rotation rot);
 void TFT_SetWindow(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
 void TFT_FillColor(uint16_t color);
+void TFT_FillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color);
 void TFT_FillScreen(uint16_t color);
 void TFT_DrawPixel(uint16_t x, uint16_t y, uint16_t color);
 void TFT_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t *data);
@@ -47,6 +48,8 @@ void TFT_DrawChar(uint16_t x, uint16_t y, char ch, const ASCIIFont *font,
                   uint16_t fg_color, uint16_t bg_color);
 void TFT_DrawString(uint16_t x, uint16_t y, const char *str, const ASCIIFont *font,
                     uint16_t fg_color, uint16_t bg_color);
+void TFT_DrawBitmap1BPP(uint16_t x, uint16_t y, uint16_t w, uint16_t h,
+                        const uint8_t *bitmap, uint16_t fg, uint16_t bg);
 void TFT_BackLight(uint8_t on);
 
 #endif /* __TFT_H__ */

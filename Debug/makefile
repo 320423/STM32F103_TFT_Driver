@@ -52,6 +52,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 F103_TFT_DEMO.list \
 
+OBJCOPY_HEX += \
+F103_TFT_DEMO.hex \
+
 
 # 所有目标
 all: main-build
@@ -75,12 +78,17 @@ F103_TFT_DEMO.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo '已结束构建： $@'
 	@echo ' '
 
+F103_TFT_DEMO.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "F103_TFT_DEMO.hex"
+	@echo '已结束构建： $@'
+	@echo ' '
+
 # 其他目标
 clean:
-	-$(RM) F103_TFT_DEMO.elf F103_TFT_DEMO.list F103_TFT_DEMO.map default.size.stdout
+	-$(RM) F103_TFT_DEMO.elf F103_TFT_DEMO.hex F103_TFT_DEMO.list F103_TFT_DEMO.map default.size.stdout
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

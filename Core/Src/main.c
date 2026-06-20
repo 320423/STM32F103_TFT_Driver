@@ -25,6 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "tft.h"
+#include "video.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -92,6 +93,8 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   TFT_Init();
+  TFT_SetRotation(TFT_ROTATION_90);  /* 横屏 320×240 */
+  TFT_FillScreen(TFT_BLACK);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -101,14 +104,33 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    TFT_FillScreen(TFT_BLACK);
-    TFT_DrawString(10, 10, "Hello, World!", &afont16x8, TFT_WHITE, TFT_BLACK);
-    TFT_DrawString(10, 35, "TFT LCD Demo", &afont12x6, TFT_YELLOW, TFT_BLACK);
-    TFT_DrawString(10, 55, "STM32F103 + ILI9341", &afont8x6, TFT_GREEN, TFT_BLACK);
-    while (1)
+    /* --- 视频 + FPS --- */
     {
+        uint32_t fps_tick = HAL_GetTick();
+        uint16_t fps_cnt = 0;
+        char fps_str[] = "FPS:   ";
+
+        while (1)
+        {
+            for (uint16_t f = 0; f < 50; f++)
+            {
+                TFT_DrawBitmap1BPP(0, 0, 320, 240, bmp[f], TFT_WHITE, TFT_BLACK);
+
+                fps_cnt++;
+                if (HAL_GetTick() - fps_tick >= 200)
+                {
+                    uint16_t v = fps_cnt * 1000 / (HAL_GetTick() - fps_tick);
+                    fps_str[5] = v >= 10 ? '0' + v / 10 : ' ';
+                    fps_str[6] = '0' + v % 10;
+                    fps_cnt = 0;
+                    fps_tick = HAL_GetTick();
+                }
+                TFT_DrawString(2, 228, fps_str, &afont12x6, TFT_YELLOW, TFT_BLACK);
+            }
+        }
     }
   /* USER CODE END 3 */
+  }
 }
 
 /**

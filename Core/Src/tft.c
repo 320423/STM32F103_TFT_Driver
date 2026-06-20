@@ -225,7 +225,7 @@ void TFT_FillColor(uint16_t color)
  * @brief 填充指定区域
  * @note  内部使用 TFT_SetWindow + 批量 SPI 写入
  */
-static void TFT_FillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)
+void TFT_FillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)
 {
     TFT_SetWindow(x, y, w, h);
     TFT_WriteColorBurst(color, (uint32_t)w * h);
@@ -282,6 +282,55 @@ void TFT_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_
     if (buf_idx > 0)
     {
         TFT_SPI_TX_DMA(dma_buf, buf_idx);
+        TFT_SPI_DMA_WAIT();
+    }
+}
+
+/* ==================== 1-Bit 位图 / 视频 ==================== */
+
+/**
+ * @brief 绘制 1-bit 位图 (横屏视频用)
+ * @param bitmap 位图数据, 每字节 8 像素, OLED 页寻址模式
+ * @note  页寻址: h/8 页 × w 列, bitmap[page*w + col], bit=row%8
+ *        LSB=顶行, 与波特律动 OLED 字库同格式
+ *        多行缓冲: 4 行一批 DMA, 减少 HAL 调用 240→60 次/帧
+ */
+void TFT_DrawBitmap1BPP(uint16_t x, uint16_t y, uint16_t w, uint16_t h,
+                        const uint8_t *bitmap, uint16_t fg, uint16_t bg)
+{
+    TFT_SetWindow(x, y, w, h);
+    TFT_DC_HIGH();
+
+    uint16_t fg16 = fg, bg16 = bg;
+
+    #define ROWS_PER_BURST 12
+    static uint8_t buf[ROWS_PER_BURST * 640];
+    uint16_t *p16 = (uint16_t *)buf;
+
+    for (uint16_t row = 0; row < h; row++)
+    {
+        uint8_t page = row / 8;
+        uint8_t bit  = row % 8;
+        const uint8_t *page_data = &bitmap[(uint32_t)page * w];
+
+        for (uint16_t col = 0; col < w; col++)
+        {
+            *p16++ = (page_data[col] >> bit) & 1 ? fg16 : bg16;
+        }
+
+        if (p16 - (uint16_t *)buf >= ROWS_PER_BURST * w)
+        {
+            uint16_t bytes = (uint8_t *)p16 - buf;
+            TFT_SPI_TX_DMA(buf, bytes);
+            TFT_SPI_DMA_WAIT();
+            p16 = (uint16_t *)buf;
+        }
+    }
+
+    uint16_t bytes = (uint8_t *)p16 - buf;
+    if (bytes > 0)
+    {
+        TFT_SPI_TX_DMA(buf, bytes);
         TFT_SPI_DMA_WAIT();
     }
 }

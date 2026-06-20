@@ -83,7 +83,7 @@
 
 /* DMA SPI (大批量像素数据) */
 #define TFT_SPI_TX_DMA(buf, n)    HAL_SPI_Transmit_DMA(&TFT_SPI_HANDLE, (buf), (n))
-#define TFT_SPI_DMA_WAIT()        while (HAL_SPI_GetState(&TFT_SPI_HANDLE) != HAL_SPI_STATE_READY) {}
+#define TFT_SPI_DMA_WAIT()        while (TFT_SPI_HANDLE.State != HAL_SPI_STATE_READY) {;}
 
 /* 延时 (ms) */
 #define TFT_DELAY_MS(ms)    HAL_Delay(ms)
